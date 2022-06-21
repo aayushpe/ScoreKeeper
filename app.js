@@ -1,5 +1,7 @@
 const p1Button = document.querySelector('#p1Button');
 const p2Button = document.querySelector('#p2Button');
+const scoreChange = document.querySelector('#p1Score');
+const scoreChange2 = document.querySelector('#p2Score');
 const reset = document.querySelector('#reset');
 const winningScoreSelect = document.querySelector('#playTo');
 
@@ -10,10 +12,10 @@ let winningScore = 1;
  function resetter(){
     p1Score = 0;
     p2Score = 0;
-    const scoreChange = document.querySelector('#p1Score');
-    const scoreChange2 = document.querySelector('#p2Score');
     scoreChange.innerText = p1Score;
     scoreChange2.innerText = p2Score;
+    scoreChange.classList.remove('winner');
+    scoreChange2.classList.remove('winner');
 }
 
 winningScoreSelect.addEventListener('change', function(){
@@ -23,18 +25,22 @@ winningScoreSelect.addEventListener('change', function(){
 
 p1Button.addEventListener('click', function(){
     if((p1Score !== winningScore) && (p2Score !== winningScore)){
-    p1Score+=1;
-    const scoreChange = document.querySelector('#p1Score');
-    scoreChange.innerText = p1Score;
+        p1Score+=1;
+        if (p1Score===winningScore){
+            scoreChange.classList.add('winner');
+        }
+        scoreChange.innerText = p1Score;
     }
     
 });
 
 p2Button.addEventListener('click', function(){
     if((p2Score !== winningScore) && (p1Score !== winningScore)){
-    p2Score+=1;
-    const scoreChange = document.querySelector('#p2Score');
-    scoreChange.innerText = p2Score;
+        p2Score+=1;
+        if (p2Score===winningScore){
+            scoreChange2.classList.add('winner');
+        }
+        scoreChange2.innerText = p2Score;
     }
 });
 
